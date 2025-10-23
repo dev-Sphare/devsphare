@@ -50,9 +50,16 @@ class User extends Authenticatable
     }
 
 
-    public function hackathons()
-{
-    return $this->hasMany(Hackathon::class, 'organizer_id');
-}
+        public function hackathons()
+    {
+        return $this->hasMany(Hackathon::class, 'organizer_id');
+    }
+
+    //rn of user and reg 
+        public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
 
 }
