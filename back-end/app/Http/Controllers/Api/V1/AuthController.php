@@ -43,18 +43,34 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (!Auth::attempt($credentials)) {
-            throw ValidationException::withMessages([
-                'email' => ['Invalid credentials provided.'],
-            ]);
-        }
+        // if (!Auth::attempt($credentials)) {
+        //     throw ValidationException::withMessages([
+        //         'email' => ['Invalid credentials provided.'],
+        //     ]);
+        // }
 
-        $request->session()->regenerate();
 
+    if (!Auth::attempt($credentials)) {
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
+
+        // $request->session()->regenerate();
+
+        // return response()->json([
+        //     'message' => 'Login successful',
+        //     'user' => Auth::user(),
+        // ], 200);
+
+
+        $user = Auth::user();
+        $token = $user->createToken('auth_token')->plainTextToken;
+    
         return response()->json([
             'message' => 'Login successful',
-            'user' => Auth::user(),
+            'user' => $user,
+            'token' => $token
         ], 200);
+ //sessionproblem
     }
 
     // Getin authenticated user
