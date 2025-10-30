@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
+    //r
     // Register 
     public function register(Request $request)
     {
